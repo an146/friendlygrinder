@@ -5,41 +5,46 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Posts: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.5.2/build/reset-fonts-grids/reset-fonts-grids.css' %>
-  <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.5.2/build/base/base-min.css' %>
-  <%= stylesheet_link_tag 'fg' %>
+  <%= stylesheet_link_tag 'style' %>
 </head>
 <body>
+  <div id="wrap">
 
-  <% if logged_in? %>
-    <p><strong>You are logged in as <%=h current_user.login %></strong></p>
-    <p><%= link_to 'Logout', logout_path %></p>
-    <% if current_user.is_admin %>
+    <% if logged_in? %>
       <p>
-        <%= link_to 'View users', users_path %>
+        <strong>You are logged in as <%=h current_user.login %></strong>
+        <%= link_to 'Logout', logout_path %>
+      </p>
+      <% if current_user.is_admin %>
+        <p>
+          <%= link_to 'View users', users_path %>
+        </p>
+      <% end %>
+    <% else %>
+      <p><strong>You are currently not logged in.</strong></p>
+      <p>
+        <%= link_to 'Login', login_path %>
       </p>
     <% end %>
-  <% else %>
-    <p><strong>You are currently not logged in.</strong></p>
-    <p>
-      <%= link_to 'Login', login_path %>
-    </p>
-  <% end %>
 
-  <div id="doc">
-    <div id="hd">
+    <div id="header">
       <h1><a href="/">Friendly Grinder</a></h1>
     </div>
 
-    <div id="bd">
-      <p class="flash"><%= flash[:notice] %></p>
-      <%= yield %>
+    <div id="content">
+      <div class="main">
+        <p class="flash"><%= flash[:notice] %></p>
+        <%= yield %>
+      </div>
     </div>
 
-    <div id="ft">
-      <small>Powered by <a href="http://rubyonrails.org/">Ruby on Rails</a></small>
+    <div id="bottom"> </div>
+
+    <div id="footer">
+      Designed by <a href="http://www.free-css-templates.com/">Free CSS Templates</a>, Thanks to <a href="http://www.openwebdesign.org/">Web Design UK</a>
+      <br />
+      Powered by <a href="http://rubyonrails.org/">Ruby on Rails</a>
     </div>
   </div>
-
 </body>
 </html>

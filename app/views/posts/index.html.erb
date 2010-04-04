@@ -1,2 +1,5 @@
+<% if logged_in? %>
+  <center><%= link_to 'New post', new_post_path %></center>
+  <hr />
+<% end %>
 <%= render :partial => 'post', :collection => @posts %>
-<%= link_to 'New post', new_post_path if logged_in? %>
