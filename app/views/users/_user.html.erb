@@ -1,0 +1,4 @@
+<tr>
+  <td><%= user.login %> <%= '<strong>(admin)</strong>' if user.is_admin %></td>
+  <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>

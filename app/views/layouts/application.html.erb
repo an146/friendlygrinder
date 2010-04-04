@@ -20,6 +20,11 @@
       <%= link_to 'Login', login_path %>
     </p>
   <% end %>
+  <% if current_user.is_admin %>
+    <p>
+      <%= link_to 'View users', users_path %>
+    </p>
+  <% end %>
 
   <div id="doc">
     <div id="hd">
