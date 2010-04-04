@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_filter :should_be_owner_or_admin, :only => [:edit, :update, :destroy]
 
   def should_be_owner_or_admin
-    if Post.find(params[:id]).user_id != current_user.id
+    if !current_user.can_edit?(Post.find(params[:id]))
       redirect_to :action => :index
     end
   end
