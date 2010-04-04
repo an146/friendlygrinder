@@ -1,3 +1,4 @@
 class Post < ActiveRecord::Base
-  has_attached_file :attachment, :default_url => ''
+  validates_presence_of :title, :body
+  has_attached_file :attachment
 end
