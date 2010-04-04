@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_filter :login_required, :except => %w[ index show ]
+
   # GET /posts
   # GET /posts.xml
   def index
