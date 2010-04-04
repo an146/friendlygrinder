@@ -1,6 +1,6 @@
 <div class="post">
   <h2><%= link_to post.title, post %></h2>
-  by <strong><%= User.find(post.user_id).login %></strong>
+  by <strong><%= post.user.login %></strong>
   <%= simple_format post.body %>
   <%= link_to 'Attachment', post.attachment.url if post.attachment.file?%>
   <%- if logged_in? %>
