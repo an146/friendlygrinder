@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :email, :password, :password_confirmation
 
   def can_edit?(post)
-    id == post.user_id
+    is_admin || id == post.user_id
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
