@@ -1,5 +1,12 @@
 class PostsController < ApplicationController
   before_filter :login_required, :except => %w[ index show ]
+  before_filter :should_be_owner_or_admin, :only => [:edit, :update, :destroy]
+
+  def should_be_owner_or_admin
+    if Post.find(params[:id]).user_id != current_user.id
+      redirect_to :action => :index
+    end
+  end
 
   # GET /posts
   # GET /posts.xml
@@ -26,8 +33,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.xml
   def new
-    @post = Post.new
-    @post.user_id = current_user.id
+    @post = Post.new(:user_id => current_user.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,8 +49,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
-    @post = Post.new(params[:post])
-    @post.user_id = current_user.id
+    @post = Post.new(params[:post].merge({ :user_id => current_user.id }))
 
     respond_to do |format|
       if @post.save
@@ -62,6 +67,7 @@ class PostsController < ApplicationController
   # PUT /posts/1.xml
   def update
     @post = Post.find(params[:id])
+    @post.errors.add_to_base("The post is not yours; you can't edit it") unless current_user.id == @post.user_id
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
