@@ -5,13 +5,26 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Posts: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.5.2/build/reset-fonts-grids/reset-fonts-grids.css' %>
+  <%= stylesheet_link_tag 'http://yui.yahooapis.com/2.5.2/build/base/base-min.css' %>
+  <%= stylesheet_link_tag 'fg' %>
 </head>
 <body>
 
-<p style="color: green"><%= flash[:notice] %></p>
+  <div id="doc">
+    <div id="hd">
+      <h1>Friendly Grinder</h1>
+    </div>
 
-<%= yield %>
+    <div id="bd">
+      <p class="flash"><%= flash[:notice] %></p>
+      <%= yield %>
+    </div>
+
+    <div id="ft">
+      <small>FriendlyGrinder project</small>
+    </div>
+  </div>
 
 </body>
 </html>

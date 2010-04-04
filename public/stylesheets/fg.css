@@ -1,0 +1,21 @@
+#doc {
+padding: 10px;
+}
+
+#hd h1 {
+text-align: center;
+font-size: 189%;
+}
+
+#bd {
+background-color: LightSteelBlue;
+padding: 10px;
+}
+
+#ft {
+padding-top: 10px;
+}
+
+body {
+background-color: LightSlateGrey;
+}
