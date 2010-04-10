@@ -1,5 +1,5 @@
 <h2><%= link_to h(post.title), post %></h2>
-by <strong><%= h(post.user.login) %></strong>
+by <strong><%= h(post.user.login) %></strong> at <%= post.created_at %>
 <%= simple_format h(post.body) %>
 <% a = Asset.find(:all, :conditions => {:post_id => post.id}) %>
 <% if a.size == 1 %>
