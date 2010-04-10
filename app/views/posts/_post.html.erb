@@ -2,7 +2,6 @@
 by <strong><%= h(post.user.login) %></strong>
 <%= simple_format h(post.body) %>
 <% a = Asset.find(:all, :conditions => {:post_id => post.id}) %>
-<%# render :partial => 'asset_array' #, :locals => {:asset_array => @asset_array} %>
 <% if a.size == 1 %>
   <%= image_tag('attachment.png') %>
   <%= link_to 'Attachment (' +

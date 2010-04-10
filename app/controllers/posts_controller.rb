@@ -69,7 +69,6 @@ class PostsController < ApplicationController
   # PUT /posts/1.xml
   def update
     @post = Post.find(params[:id])
-    @post.errors.add_to_base("The post is not yours; you can't edit it") unless current_user.id == @post.user_id
 
     respond_to do |format|
       if @post.update_attributes(params[:post])

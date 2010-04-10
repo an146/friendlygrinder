@@ -11,6 +11,22 @@
     <%= f.label :body %><br />
     <%= f.text_area :body %>
   </p>
+  <% a = Asset.find(:all, :conditions => {:post_id => @post.id}) %>
+  <% if a.size == 1 %>
+    <%= image_tag('attachment.png') %>
+    <%= link_to 'Attachment (' +
+      File.basename(a[0].name) + ', ' +
+      number_to_human_size(a[0].file_size) + ')',
+      a[0].url
+    %>
+  <% elsif a.size > 1 %>
+    <% s = 0 %>
+    <% a.each { |asset| s += asset.file_size } %>
+    <% url = File.dirname(a[0].url) %>
+    <% text = a.size.to_s + ' attachments (' + number_to_human_size(s) + ')' %>
+    <%= image_tag('attachment.png') %>
+    <%= link_to text, url %>
+  <% end %>
   <p>
     <%= f.submit 'Update' %>
   </p>
