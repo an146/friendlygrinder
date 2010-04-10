@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.xml
   def new
-    @post = Post.new(:user_id => current_user.id)
+    @post = current_user.posts.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
-    @post = Post.new(params[:post].merge({ :user_id => current_user.id }))
+    @post = current_user.posts.new(params[:post])
 
     respond_to do |format|
       if @post.save
