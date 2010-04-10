@@ -4,4 +4,5 @@ doc/api
 doc/app
 db/*.sqlite3
 public/system/attachments
+public/attachments
 *.swp

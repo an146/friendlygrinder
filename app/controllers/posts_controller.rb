@@ -51,6 +51,8 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(params[:post])
 
+    process_uploads(@post) if params[:attachment]
+
     respond_to do |format|
       if @post.save
         flash[:notice] = 'Post was successfully created.'
@@ -90,6 +92,18 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(posts_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  protected
+
+  def process_uploads(post)
+    i = 0
+    while true
+      f = params[:attachment]['file_' + i.to_s]
+      break if f == "" || f.nil?
+      post.assets.build :attachment => f
+      i += 1
     end
   end
 end

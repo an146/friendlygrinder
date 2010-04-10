@@ -1,13 +1,22 @@
 <h2><%= link_to h(post.title), post %></h2>
 by <strong><%= h(post.user.login) %></strong>
 <%= simple_format h(post.body) %>
-<% a = post.attachment %>
-<% if post.attachment.file? %>
+<% a = Asset.find(:all, :conditions => {:post_id => post.id}) %>
+<%# render :partial => 'asset_array' #, :locals => {:asset_array => @asset_array} %>
+<% if a.size == 1 %>
+  <%= image_tag('attachment.png') %>
   <%= link_to 'Attachment (' +
-    File.basename(a.original_filename) + ', ' +
-    number_to_human_size(a.size) + ')',
-    post.attachment.url
+    File.basename(a[0].name) + ', ' +
+    number_to_human_size(a[0].file_size) + ')',
+    a[0].url
   %>
+<% elsif a.size > 1 %>
+  <% s = 0 %>
+  <% a.each { |asset| s += asset.file_size } %>
+  <% url = File.dirname(a[0].url) %>
+  <% text = a.size.to_s + ' attachments (' + number_to_human_size(s) + ')' %>
+  <%= image_tag('attachment.png') %>
+  <%= link_to text, url %>
 <% end %>
 <%- if logged_in? && current_user.can_edit?(post) %>
   <%= link_to 'Edit', edit_post_path(post) %>

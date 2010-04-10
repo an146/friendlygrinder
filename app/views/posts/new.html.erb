@@ -12,8 +12,13 @@
     <%= f.text_area :body %>
   </p>
   <p>
-    <%= f.label :attachment %><br />
+    <%= f.label :attachments %><br />
     <%= f.file_field :attachment %>
+    <div id="attachment_list"><ul id="pending_files"></ul></div>
+    <script type="text/javascript">
+      var multi_selector = new MultiSelector($('pending_files'));
+      multi_selector.addElement($('post_attachment'));
+    </script>
   </p>
   <p>
     <%= f.submit 'Create' %>
