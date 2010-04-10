@@ -13,8 +13,8 @@
   </p>
   <p>
     <%= f.label :attachments %><br />
-    <%= f.file_field :attachment %>
     <div id="attachment_list"><ul id="pending_files"></ul></div>
+    <%= f.file_field :attachment %>
     <script type="text/javascript">
       var multi_selector = new MultiSelector($('pending_files'));
       multi_selector.addElement($('post_attachment'));
