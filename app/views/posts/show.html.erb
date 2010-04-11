@@ -12,6 +12,8 @@
       <%= f.label "Your name:" %><br />
       <%= f.text_field :author %>
     </p>
+  <% else %>
+    <%= f.hidden_field :author, :value => current_user.login %>
   <% end %>
 
   <p>

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
-    if params[:captcha] != '444'
+    if !logged_in? && params[:captcha] != '444'
       flash[:notice] = "Error creating comment: wrong captcha"
       redirect_to(@comment.post)
     elsif @comment.save
