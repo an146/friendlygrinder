@@ -1,6 +1,6 @@
 <%= render :partial => 'post', :object => @post %>
 <a name="comments"></a>
-<%= render :partial => 'comment', :collection => @post.comments %>
+<%= render :partial => 'comment', :collection => @post.comments.sort_by(&:id) %>
 <hr />
 <% form_for @comment do|f| %>
   <%= f.error_messages %>
