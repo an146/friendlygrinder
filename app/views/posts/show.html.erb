@@ -19,6 +19,13 @@
     <%= f.text_area :body %>
   </p>
 
+  <% if !logged_in? %>
+    <p>
+      <%= f.label "123 + 321 = " %><br />
+      <input name="captcha" type="text" />
+    </p>
+  <% end %>
+
   <p>
     <%= f.submit "Post Comment" %>
   </p>
