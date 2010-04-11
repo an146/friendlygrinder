@@ -2,6 +2,7 @@ class Assets < ActiveRecord::Migration
   def self.up
     create_table :assets do |t|
       t.references :post
+      t.references :user
 
       t.string :attachment_file_name
       t.string :attachment_content_type

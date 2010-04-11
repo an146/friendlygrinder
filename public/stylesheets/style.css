@@ -118,3 +118,7 @@ text-align: center;
   margin-left:1em;
 }
 
+.comment {
+  background: #ddd;
+  padding: 0 0 0 10px;
+}

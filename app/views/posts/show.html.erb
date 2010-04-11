@@ -1,1 +1,25 @@
 <%= render :partial => 'post', :object => @post %>
+<a name="comments"></a>
+<%= render :partial => 'comment', :collection => @post.comments %>
+<hr />
+<% form_for @comment do|f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :post_id %>
+  <%= f.hidden_field :user_id %>
+
+  <% if !logged_in? %>
+    <p>
+      <%= f.label "Your name:" %><br />
+      <%= f.text_field :author %>
+    </p>
+  <% end %>
+
+  <p>
+    <%= f.label "Comment:" %><br />
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.submit "Post Comment" %>
+  </p>
+<% end %>

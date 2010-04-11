@@ -1,6 +1,7 @@
 <h2><%= link_to h(post.title), post %></h2>
 by <strong><%= h(post.user.login) %></strong> at <%= post.created_at %>
 <%= simple_format h(post.body) %>
+
 <% a = Asset.find(:all, :conditions => {:post_id => post.id}) %>
 <% if a.size == 1 %>
   <%= image_tag('attachment.png') %>
@@ -17,11 +18,21 @@ by <strong><%= h(post.user.login) %></strong> at <%= post.created_at %>
   <%= image_tag('attachment.png') %>
   <%= link_to text, url %>
 <% end %>
+
+<p>
+  <% c = Comment.find(:all, :conditions => {:post_id => post.id}) %>
+  <%= c.empty? ? "No comments yet." : link_to(c.size.to_s + " comments.", post_path(post, :anchor => 'comments')) %>
+  <%= link_to "Write a comment", post_path(post, :anchor => 'new_comment') %>
+</p>
+
 <%- if logged_in? && current_user.can_edit?(post) %>
-  <%= link_to 'Edit', edit_post_path(post) %>
-  <%= link_to 'Destroy', post,
-    :confirm => 'Are you sure?',
-    :method => :delete
-  %>
+  <p>
+    <%= link_to 'Edit', edit_post_path(post) %>
+    <%= link_to 'Destroy', post,
+      :confirm => 'Are you sure?',
+      :method => :delete
+    %>
+  </p>
 <%- end %>
+
 <hr />

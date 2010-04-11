@@ -1,0 +1,11 @@
+<div class="comment">
+  <% author = comment.user.nil? ? comment.author : "<b>" + comment.user.login + "</b>" %>
+  comment by <%= author %> at <%= comment.created_at %><br />
+  <%= simple_format h(comment.body) %>
+  <%- if logged_in? && current_user.is_admin %>
+    <%= link_to 'Destroy Comment', comment,
+      :confirm => 'Are you sure?',
+      :method => :delete %>
+  <%- end %>
+  <hr />
+</div>
